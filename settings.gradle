@@ -1,2 +1,3 @@
 include ':app'
+include ':view_image_touch'
 rootProject.name = "ImageTouchView"

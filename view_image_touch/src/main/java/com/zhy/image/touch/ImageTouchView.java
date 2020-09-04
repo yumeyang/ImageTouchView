@@ -1,5 +1,9 @@
 package com.zhy.image.touch;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,10 +24,6 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * 单手对图片进行缩放，旋转，平移操作
@@ -241,8 +241,8 @@ public class ImageTouchView extends View {
         TypedArray mTypedArray = getContext().obtainStyledAttributes(attrs,
                 R.styleable.ImageTouchView);
 
-        Drawable img_src = mTypedArray.getDrawable(R.styleable.ImageTouchView_src);
-        mBitmap = drawable2Bitmap(img_src);
+        Drawable srcDrawble = mTypedArray.getDrawable(R.styleable.ImageTouchView_src);
+        mBitmap = drawable2Bitmap(srcDrawble);
 
         framePadding = mTypedArray.getDimensionPixelSize(R.styleable.ImageTouchView_framePadding, framePadding);
         frameWidth = mTypedArray.getDimensionPixelSize(R.styleable.ImageTouchView_frameWidth, frameWidth);
