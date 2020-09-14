@@ -1,10 +1,5 @@
 package com.zhy.image.touch;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -24,6 +19,11 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 
 /**
  * 单手对图片进行缩放，旋转，平移操作
@@ -232,7 +232,6 @@ public class ImageTouchView extends View {
      *
      * @param attrs
      */
-    @SuppressLint("UseCompatLoadingForDrawables")
     private void obtainStyledAttributes(AttributeSet attrs) {
         metrics = getContext().getResources().getDisplayMetrics();
         framePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_FRAME_PADDING, metrics);
@@ -250,14 +249,10 @@ public class ImageTouchView extends View {
         mScale = mTypedArray.getFloat(R.styleable.ImageTouchView_scale, DEFAULT_SCALE);
         mDegree = mTypedArray.getFloat(R.styleable.ImageTouchView_degree, DEFAULT_DEGREE);
         controlDrawable = mTypedArray.getDrawable(R.styleable.ImageTouchView_controlDrawable);
-        if (controlDrawable == null) {
-            controlDrawable = getResources().getDrawable(R.drawable.ic_move_and_rotate);
-        }
         controlLocation = mTypedArray.getInt(R.styleable.ImageTouchView_controlLocation, DEFAULT_CONTROL_LOCATION);
         isEditable = mTypedArray.getBoolean(R.styleable.ImageTouchView_editable, DEFAULT_EDITABLE);
         mAutoMoveTop = mTypedArray.getBoolean(R.styleable.ImageTouchView_auto_move_top, false);
         mTypedArray.recycle();
-
     }
 
 
@@ -267,6 +262,10 @@ public class ImageTouchView extends View {
         mPaint.setColor(frameColor);
         mPaint.setStrokeWidth(frameWidth);
         mPaint.setStyle(Style.STROKE);
+
+        if (controlDrawable == null) {
+            controlDrawable = getContext().getResources().getDrawable(R.drawable.ic_move_and_rotate);
+        }
 
         mDrawableWidth = controlDrawable.getIntrinsicWidth();
         mDrawableHeight = controlDrawable.getIntrinsicHeight();
@@ -510,9 +509,6 @@ public class ImageTouchView extends View {
                     // 修改中心点
                     mCenterPoint.x += mCurMovePointF.x - mPreMovePointF.x;
                     mCenterPoint.y += mCurMovePointF.y - mPreMovePointF.y;
-
-                    System.out.println(this + "move = " + mCenterPoint);
-
                     adjustLayout();
                 }
 
